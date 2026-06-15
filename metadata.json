@@ -1,0 +1,6 @@
+{
+  "name": "Mentoria Hub",
+  "description": "Цифровая платформа Mentoria Hub для поиска образовательных возможностей и асинхронного обучения.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
