@@ -18,6 +18,7 @@ export default function AdminView({
 }: AdminViewProps) {
   const [activePane, setActivePane] = useState<'opportunities' | 'courses' | 'users'>('opportunities');
 
+  
   const [editingOppId, setEditingOppId] = useState<string | null>(null);
   const [oppTitle, setOppTitle] = useState('');
   const [oppCategory, setOppCategory] = useState<Category>('STEM');
@@ -238,7 +239,7 @@ export default function AdminView({
 
   return (
     <div id="admin-hub" className="space-y-8 font-sans">
-      {}
+      
       <div className="bg-slate-900 border border-slate-800 text-white rounded-xl p-6 sm:p-8 flex items-center justify-between shadow-xl text-left">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 bg-blue-500/20 text-blue-300 font-extrabold text-[10px] px-3 py-1 rounded border border-blue-500/20 uppercase tracking-widest leading-none">
@@ -252,7 +253,7 @@ export default function AdminView({
         </div>
       </div>
 
-      {}
+      
       <section id="admin-stats-grid" className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
         <div className="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 shadow-sm">
           <span className="p-3 bg-slate-100 text-slate-800 rounded border border-slate-200">
@@ -295,7 +296,7 @@ export default function AdminView({
         </div>
       </section>
 
-      {}
+      
       <div className="flex border-b border-slate-200 text-xs gap-1.5 overflow-x-auto pb-0">
         <button
           onClick={() => setActivePane('opportunities')}
@@ -315,7 +316,7 @@ export default function AdminView({
               : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50 border-transparent'
           }`}
         >
-           Академические курсы ({courses.length})
+          📖 Академические курсы ({courses.length})
         </button>
         <button
           onClick={() => setActivePane('users')}
@@ -329,9 +330,9 @@ export default function AdminView({
         </button>
       </div>
 
-      {}
+      
       <div className="space-y-6">
-        {}
+        
         {activePane === 'opportunities' && (
           <div className="space-y-6 text-left">
             <div className="flex justify-between items-center bg-white p-4 border border-slate-200 rounded-xl shadow-sm">
@@ -351,7 +352,7 @@ export default function AdminView({
               )}
             </div>
 
-            {}
+            
             {showOppForm && (
               <form onSubmit={handleOppSubmit} className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-5 shadow-lg">
                 <div className="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -368,7 +369,7 @@ export default function AdminView({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans">
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700">Название программы / конкурса</label>
                     <input
@@ -381,7 +382,7 @@ export default function AdminView({
                     />
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700">Организатор</label>
                     <input
@@ -394,7 +395,7 @@ export default function AdminView({
                     />
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700">Направление образования</label>
                     <select
@@ -408,7 +409,7 @@ export default function AdminView({
                     </select>
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700">Формат проведения</label>
                     <select
@@ -422,7 +423,7 @@ export default function AdminView({
                     </select>
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1 text-left">
                     <label className="font-bold text-slate-700">Крайний срок подачи заявок (Deadline)</label>
                     <input
@@ -434,7 +435,7 @@ export default function AdminView({
                     />
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700 block text-left">Целевые классы учеников</label>
                     <div className="flex gap-1.5 flex-wrap pt-1">
@@ -459,7 +460,7 @@ export default function AdminView({
                   </div>
                 </div>
 
-                {}
+                
                 <div className="space-y-1 text-xs">
                   <label className="font-bold text-slate-700">Развернутое описание возможностей</label>
                   <textarea
@@ -472,7 +473,7 @@ export default function AdminView({
                   />
                 </div>
 
-                {}
+                
                 <div className="space-y-1 text-xs">
                   <label className="font-bold text-slate-700">Условия приема документов, Ограничения и Требования</label>
                   <textarea
@@ -504,7 +505,7 @@ export default function AdminView({
               </form>
             )}
 
-            {}
+            
             <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-600 border-collapse table-auto min-w-[600px]">
                 <thead>
@@ -552,7 +553,7 @@ export default function AdminView({
           </div>
         )}
 
-        {}
+        
         {activePane === 'courses' && (
           <div className="space-y-6 text-left">
             <div className="flex justify-between items-center bg-white p-4 border border-slate-200 rounded-xl shadow-sm">
@@ -572,7 +573,7 @@ export default function AdminView({
               )}
             </div>
 
-            {}
+            
             {showCourseForm && (
               <form onSubmit={handleCourseSubmit} className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-5 shadow-lg">
                 <div className="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -589,7 +590,7 @@ export default function AdminView({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans">
-                  {}
+                  
                   <div className="space-y-1 text-left">
                     <label className="font-bold text-slate-700">Название учебного курса</label>
                     <input
@@ -602,7 +603,7 @@ export default function AdminView({
                     />
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700">Академическая сфера</label>
                     <select
@@ -616,7 +617,7 @@ export default function AdminView({
                     </select>
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1 text-left">
                     <label className="font-bold text-slate-700">Уровень сложности</label>
                     <select
@@ -630,7 +631,7 @@ export default function AdminView({
                     </select>
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1">
                     <label className="font-bold text-slate-700">Продолжительность курса (Duration)</label>
                     <input
@@ -643,7 +644,7 @@ export default function AdminView({
                     />
                   </div>
 
-                  {}
+                  
                   <div className="space-y-1 sm:col-span-2 text-left">
                     <label className="font-bold text-slate-700">Ссылка на обложку курса (Unsplash URL или др)</label>
                     <input
@@ -656,7 +657,7 @@ export default function AdminView({
                   </div>
                 </div>
 
-                {}
+                
                 <div className="space-y-1 text-xs">
                   <label className="font-bold text-slate-700">Сжатая аннотация и цели изучения курса</label>
                   <textarea
@@ -670,8 +671,9 @@ export default function AdminView({
                 </div>
 
                 <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-[11px] text-slate-500 leading-relaxed font-light">
-                   <strong>Важное примечание:</strong> при создании абсолютно нового курса, наша платформа автоматически генерирует в нем <strong>два полноценных интерактивных урока</strong> с симулированными лекциями, подробными текстовыми материалами и интерактивными формами вопросов на автопроверку. Это помогает тестировать MVP-путь учеников мгновенно.
+                  💡 <strong>Важное примечание:</strong> при создании абсолютно нового курса, наша платформа автоматически генерирует в нем <strong>два полноценных интерактивных урока</strong> с симулированными лекциями, подробными текстовыми материалами и интерактивными формами вопросов на автопроверку. Это помогает тестировать MVP-путь учеников мгновенно.
                 </div>
+
                 <div className="flex justify-end gap-3 pt-2 text-xs font-bold font-sans">
                   <button
                     type="button"
@@ -691,7 +693,7 @@ export default function AdminView({
               </form>
             )}
 
-            {}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {courses.map((course) => (
                 <div
@@ -730,7 +732,7 @@ export default function AdminView({
           </div>
         )}
 
-        {}
+        
         {activePane === 'users' && (
           <div className="space-y-6 text-left">
             <div className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
@@ -800,4 +802,6 @@ export default function AdminView({
       </div>
     </div>
   );
+}
+
 }
