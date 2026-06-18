@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserProfile, Opportunity, Course, EnrollmentState } from './types';
 import { INITIAL_COURSES, INITIAL_OPPORTUNITIES } from './mockData';
+import { Language } from './localization';
 
 
 import Onboarding from './components/Onboarding';
@@ -18,18 +19,18 @@ export default function App() {
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     const saved = localStorage.getItem('mentoria_user_profile');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {  }
+      try { return JSON.parse(saved); } catch (e) { /* fallback */ }
     }
     return {
       name: 'Адиль Каримов',
-      email: 'adil.karimov@example.com',
+      email: 'adil@example.com',
       grade: '10',
       interests: ['STEM', 'Programming', 'Business'],
       goals: [
         'Поступление в зарубежный вуз (США, Европа, Азия)',
         'Изучение программирования с нуля и участие в хакатонах'
       ],
-      hasOnboarded: false,
+      hasOnboarded: true,
       role: 'student'
     };
   });
@@ -37,7 +38,12 @@ export default function App() {
   const [opportunities, setOpportunities] = useState<Opportunity[]>(() => {
     const saved = localStorage.getItem('mentoria_opportunities');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {  }
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length >= INITIAL_OPPORTUNITIES.length) {
+          return parsed;
+        }
+      } catch (e) 
     }
     return INITIAL_OPPORTUNITIES;
   });
@@ -45,7 +51,7 @@ export default function App() {
   const [courses, setCourses] = useState<Course[]>(() => {
     const saved = localStorage.getItem('mentoria_courses');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {  }
+      try { return JSON.parse(saved); } catch (e) 
     }
     return INITIAL_COURSES;
   });
@@ -53,15 +59,15 @@ export default function App() {
   const [savedOpportunities, setSavedOpportunities] = useState<string[]>(() => {
     const saved = localStorage.getItem('mentoria_saved_opportunities');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {  }
+      try { return JSON.parse(saved); } catch (e) 
     }
-    return ['opp-1']; 
+    return ['opp-1']; // bookmark first opportunity as preview
   });
 
   const [enrollments, setEnrollments] = useState<EnrollmentState[]>(() => {
     const saved = localStorage.getItem('mentoria_enrollments');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {  }
+      try { return JSON.parse(saved); } catch (e) 
     }
     
     return [
@@ -75,12 +81,22 @@ export default function App() {
 
   const [currentTab, setCurrentTab] = useState<string>('home');
   
+  
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     const savedStatus = localStorage.getItem('mentoria_is_logged_in');
-    return savedStatus === 'true' || savedStatus === null;
+    return savedStatus === 'true';
+  });
+
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = localStorage.getItem('mentoria_language');
+    return (saved as Language) || 'ru';
   });
 
   
+  useEffect(() => {
+    localStorage.setItem('mentoria_language', language);
+  }, [language]);
+
   useEffect(() => {
     localStorage.setItem('mentoria_user_profile', JSON.stringify(userProfile));
   }, [userProfile]);
@@ -198,7 +214,6 @@ export default function App() {
 
   const handleOpenCourse = (courseId: string) => {
     setCurrentTab('courses');
-    
   };
 
   const handleLogout = () => {
@@ -215,6 +230,8 @@ export default function App() {
           setIsLoggedIn(true);
           localStorage.setItem('mentoria_is_logged_in', 'true');
         }}
+        language={language}
+        onLanguageChange={setLanguage}
       />
     );
   }
@@ -222,7 +239,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans antialiased pb-20 md:pb-0">
       
-      {}
+      
       <Navbar
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
@@ -230,16 +247,21 @@ export default function App() {
         toggleRole={toggleRole}
         onResetPreferences={handleResetPreferences}
         onLogout={handleLogout}
+        language={language}
+        onLanguageChange={setLanguage}
       />
 
-      {}
+      
       <AnimatePresence>
         {!userProfile.hasOnboarded && (
-          <Onboarding onComplete={handleOnboardingComplete} />
+          <Onboarding
+            onComplete={handleOnboardingComplete}
+            language={language}
+          />
         )}
       </AnimatePresence>
 
-      {}
+      
       <main className="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
         <AnimatePresence mode="wait">
           <motion.div
@@ -260,6 +282,7 @@ export default function App() {
                 setCurrentTab={setCurrentTab}
                 enrollInCourse={handleEnrollInCourse}
                 enrolledCourseIds={enrollments.map((e) => e.courseId)}
+                language={language}
               />
             )}
 
@@ -269,6 +292,7 @@ export default function App() {
                 savedOpportunities={savedOpportunities}
                 toggleSaveOpportunity={toggleSaveOpportunity}
                 userGrade={userProfile.grade}
+                language={language}
               />
             )}
 
@@ -280,6 +304,7 @@ export default function App() {
                 onCompleteLesson={handleCompleteLesson}
                 onSaveQuizAnswer={handleSaveQuizAnswer}
                 savedOpportunitiesCount={savedOpportunities.length}
+                language={language}
               />
             )}
 
@@ -295,6 +320,7 @@ export default function App() {
                 onResetPreferences={handleResetPreferences}
                 onOpenCourse={handleOpenCourse}
                 onUpdateProfile={handleUpdateProfile}
+                language={language}
               />
             )}
 
@@ -310,10 +336,16 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      {}
+      
       <footer className="hidden md:block py-8 border-t border-slate-100 bg-white select-none">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-sans">
-          <p> 2026 Mentoria Hub.</p>
+          <p>
+            {language === 'en' 
+              ? ' 2026 Mentoria Hub. ' 
+              : language === 'kk' 
+              ? ' 2026 Mentoria Hub.' 
+              : ' 2026 Mentoria Hub. '}
+          </p>
           <div className="flex gap-4 mt-2 sm:mt-0 font-medium text-slate-500">
             
             <span>•</span>
