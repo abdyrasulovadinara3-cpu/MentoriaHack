@@ -316,7 +316,7 @@ export default function AdminView({
               : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50 border-transparent'
           }`}
         >
-          📖 Академические курсы ({courses.length})
+           Академические курсы ({courses.length})
         </button>
         <button
           onClick={() => setActivePane('users')}
@@ -357,7 +357,7 @@ export default function AdminView({
               <form onSubmit={handleOppSubmit} className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-5 shadow-lg">
                 <div className="flex justify-between items-center pb-3 border-b border-slate-100">
                   <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-tight">
-                    {editingOppId ? '✏ Редактировать карточку' : '➕ Добавить новую возможность в каталог'}
+                    {editingOppId ? ' Редактировать карточку' : '➕ Добавить новую возможность в каталог'}
                   </h4>
                   <button
                     type="button"
@@ -578,7 +578,7 @@ export default function AdminView({
               <form onSubmit={handleCourseSubmit} className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-5 shadow-lg">
                 <div className="flex justify-between items-center pb-3 border-b border-slate-100">
                   <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-tight">
-                    {editingCourseId ? '✏ Редактировать курс' : '➕ Создать новый асинхронный курс'}
+                    {editingCourseId ? ' Редактировать курс' : '➕ Создать новый асинхронный курс'}
                   </h4>
                   <button
                     type="button"
@@ -671,7 +671,7 @@ export default function AdminView({
                 </div>
 
                 <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-[11px] text-slate-500 leading-relaxed font-light">
-                  💡 <strong>Важное примечание:</strong> при создании абсолютно нового курса, наша платформа автоматически генерирует в нем <strong>два полноценных интерактивных урока</strong> с симулированными лекциями, подробными текстовыми материалами и интерактивными формами вопросов на автопроверку. Это помогает тестировать MVP-путь учеников мгновенно.
+                   <strong>Важное примечание:</strong> при создании абсолютно нового курса, наша платформа автоматически генерирует в нем <strong>два полноценных интерактивных урока</strong> с симулированными лекциями, подробными текстовыми материалами и интерактивными формами вопросов на автопроверку. Это помогает тестировать MVP-путь учеников мгновенно.
                 </div>
 
                 <div className="flex justify-end gap-3 pt-2 text-xs font-bold font-sans">
@@ -802,6 +802,4 @@ export default function AdminView({
       </div>
     </div>
   );
-}
-
 }
