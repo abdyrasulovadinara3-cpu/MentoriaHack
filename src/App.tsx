@@ -19,7 +19,7 @@ export default function App() {
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     const saved = localStorage.getItem('mentoria_user_profile');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) { /* fallback */ }
+      try { return JSON.parse(saved); } catch (e) {}
     }
     return {
       name: 'Адиль Каримов',
@@ -43,7 +43,7 @@ export default function App() {
         if (Array.isArray(parsed) && parsed.length >= INITIAL_OPPORTUNITIES.length) {
           return parsed;
         }
-      } catch (e) 
+      } catch (e) { /* fallback */ }
     } 
     return INITIAL_OPPORTUNITIES;
   }); 
@@ -58,15 +58,15 @@ export default function App() {
   const [savedOpportunities, setSavedOpportunities] = useState<string[]>(() => {
     const saved = localStorage.getItem('mentoria_saved_opportunities');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) 
+      try { return JSON.parse(saved); } catch (e) { /* fallback */ }
     }
-    return ['opp-1']; // bookmark first opportunity as preview
+    return ['opp-1']; 
   });
 
   const [enrollments, setEnrollments] = useState<EnrollmentState[]>(() => {
     const saved = localStorage.getItem('mentoria_enrollments');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) 
+      try { return JSON.parse(saved); } catch (e) { /* fallback */ }
     }
     
     return [
