@@ -38,16 +38,15 @@ export default function App() {
   const [opportunities, setOpportunities] = useState<Opportunity[]>(() => {
     const saved = localStorage.getItem('mentoria_opportunities');
     if (saved) {
-      try {
+      try { 
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length >= INITIAL_OPPORTUNITIES.length) {
           return parsed;
         }
       } catch (e) 
-    }
+    } 
     return INITIAL_OPPORTUNITIES;
-  });
-
+  }); 
   const [courses, setCourses] = useState<Course[]>(() => {
     const saved = localStorage.getItem('mentoria_courses');
     if (saved) {
