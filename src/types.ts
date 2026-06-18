@@ -57,7 +57,6 @@ export interface EnrollmentState {
   courseId: string;
   completedLessons: string[]; 
   quizAnswers: Record<string, number>; 
-}
 
 export interface AppState {
   opportunities: Opportunity[];
